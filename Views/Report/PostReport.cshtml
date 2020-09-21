@@ -1,0 +1,143 @@
+﻿@using WebApiReportService.ViewModels;
+@model ReportViewModel;
+<div class="content">
+    <table border="0">
+        <tr>
+            @{
+                switch (Model.guideidbystring)//в начале строим заголовок таблицы так называемый)) определяем какой справочник по строкам
+                {
+                    case 1://если это объекты строительства
+                        foreach (var el in Model.ListEnabledAtributesByString)
+                        {
+                            <th></th>  //пропускаем заголовки под них
+                        }
+                        switch (Model.ListEnabledAtributByColumn.FindIndex(v => v)) //далее определяем какой атрибут указан у версии данных и добавляем значения исходя из количества версий данных
+                                                                                    //в заголовок
+                        {
+                            case 0:
+                                foreach (var el in Model.Versions)
+                                {
+                                    <th>@{el.id.ToString();}</th> 
+                                }
+                                break;
+                            case 1:
+                                foreach (var el in Model.Versions)
+                                {
+                                    <th>@{el.Name.ToString();}</th>
+                                }
+                                break;
+                            case 2:
+                                foreach (var el in Model.Versions)
+                                {
+                                    <th>@{el.VersionType.ToString();}</th>
+                                }
+                                break;
+                        }
+                        break;
+                    case 2: //если это версии данных, то все тоже самое только наоборот
+                        foreach (var el in Model.ListEnabledAtributesByString)
+                        {
+                            <th></th>
+                        }
+                        switch (Model.ListEnabledAtributByColumn.FindIndex(v => v))
+                        {
+                            case 0:
+                                foreach (var el in Model.Constructions)
+                                {
+                                    <th>@{el.id.ToString();}</th>
+                                                    }
+                                break;
+                            case 1:
+                                foreach (var el in Model.Constructions)
+                                {
+                                    <th>@{el.Name.ToString();}</th>
+                                }
+                                break;
+                            case 2:
+                                foreach (var el in Model.Constructions)
+                                {
+                                    <th>@{el.ObjectCode.ToString();}</th>
+                                }
+                                break;
+                            case 3:
+                                foreach (var el in Model.Constructions)
+                                {
+                                    <th>@{el.Budget.ToString();}</th>
+                                }
+                                break;
+                        }
+                        break;
+                }
+            }
+        </tr>
+
+        @{//разобрались с заголовком, идем дальше выводить остальную информацию
+
+            switch (Model.guideidbystring)
+            {
+                case 1: //по той же схеме если справочник по стокам объекты стороительства,то
+                    foreach (var constr in Model.Constructions) //перечисляем все объекты
+                    {
+                        <tr>
+                            @{
+                                /*определяем какой атрибут включен, какой выключен, выводим только включенные*/
+                                if (Model.ListEnabledAtributesByString[0]) 
+                                {
+                                    <td>@constr.id.ToString();</td>
+                                }
+                                if (Model.ListEnabledAtributesByString[1])
+                                {
+                                    <td>@constr.Name.ToString();</td>
+                                }
+                                if (Model.ListEnabledAtributesByString[2])
+                                {
+                                    <td>@constr.ObjectCode.ToString();</td>
+                                }
+                                if (Model.ListEnabledAtributesByString[3])
+                                {
+                                    <td>@constr.Budget.ToString();</td>
+                                }
+
+
+                                foreach (var vers in Model.Versions)//на соответсвие к данному объекту к каждой версии выводим значение
+                                {
+                                    <td>@Model.Intersections.Find(i => i.Construction.Equals(constr) && i.Version.Equals(vers)).DataIntersection.ToString();</td>
+                                }
+                            }
+                        </tr>
+                    }
+                    break;
+                case 2: //если это версия данных, то все тоже самое, только меняем справочники местами
+
+                    foreach (var vers in Model.Versions)
+                    {
+                        <tr>
+                            @{
+
+                                if (Model.ListEnabledAtributesByString[0])
+                                {
+                                    <td>@vers.id.ToString();</td>
+                                }
+                                if (Model.ListEnabledAtributesByString[1])
+                                {
+                                    <td>@vers.Name.ToString();</td>
+                                }
+                                if (Model.ListEnabledAtributesByString[2])
+                                {
+                                    <td>@vers.VersionType.ToString();</td>
+                                }
+
+                                foreach (var constr in Model.Constructions)
+                                {
+                                    <td>@Model.Intersections.Find(i => i.Construction.Equals(constr) && i.Version.Equals(vers)).DataIntersection.ToString();</td>
+                                }
+                            }
+                        </tr>
+                    }
+
+                    break;
+            }
+        }
+
+    </table>
+</div>

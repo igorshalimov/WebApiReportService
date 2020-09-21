@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiReportService", "WebApiReportService.csproj", "{FB0D3AF3-634E-4A73-81CA-82B7DC18A9B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB0D3AF3-634E-4A73-81CA-82B7DC18A9B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB0D3AF3-634E-4A73-81CA-82B7DC18A9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB0D3AF3-634E-4A73-81CA-82B7DC18A9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB0D3AF3-634E-4A73-81CA-82B7DC18A9B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB5691AA-DE85-4C49-B641-B73AF5439CCE}
+	EndGlobalSection
+EndGlobal
